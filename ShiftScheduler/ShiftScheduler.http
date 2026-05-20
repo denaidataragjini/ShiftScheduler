@@ -1,0 +1,6 @@
+@ShiftScheduler_HostAddress = http://localhost:5037
+
+GET {{ShiftScheduler_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
