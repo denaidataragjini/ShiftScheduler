@@ -1,0 +1,72 @@
+Id,UserName,ShiftCode,ContractHours,NightShift
+2a8d4497-df7f-414a-8ac8-1ad165a85e25,Marco.Pieraccini,MAP,40,1
+373b205d-f25f-4508-80da-ce42e59f5c9b,Maurizio.Moretti,NULL,40,1
+157e4c9d-980e-4897-ad5f-f4c5c301f195,Arianna.Salucci,AR,36,1
+c5ce5a45-2b0a-40ff-a82f-ea5df6501805,pia.failli,PIA - PIA F.,36,1
+6548dfd4-e2fb-4d11-8745-1f62d8dd322c,filippo.fabbri,FIL,36,1
+2320cb1b-d64f-4486-aabe-9754c12a1d06,andrea.bacci,AB - ANDREA B.,36,1
+0fac737b-0e61-46db-a27a-52730d65cb9a,marco.pancioni,MP - MARCO PANCIONI,36,1
+84ae2a70-f4ab-49c8-aad6-bd107882a9a0,asystems,ASYS,40,1
+95bf29ca-f6b4-4fbb-88b1-46de45dcf625,Silvia.Borgogni,SBO,36,1
+1641a578-00b2-4973-955d-095bc254d709,gianna.ferrini,GF - GIANNA F.,36,1
+1b96029f-d249-4657-97e1-ce4086f265fc,martina.vedda,MV,30,1
+f03ea971-0ec2-4be7-aae9-364f3922b741,selene.commisso,SEL,30,1
+ff7cc517-15bb-4dc9-a941-2902d92fc311,Loredana.Damian,LO,36,1
+1a75df7a-e558-47c6-8af0-033582318b99,lara.salomone,LS - LARA S.,36,1
+925fe8e4-a2de-433d-8c9d-b07fd34a8c36,michele.bianchini,BM  - MICHELE B,30,1
+4da65404-40f7-408c-8831-dec60d86d60b,Patrizia.Bacci,PBA - PATRIZIA B.,30,1
+1ddcffe7-c2ad-4836-a35b-75b12da1d336,giorgia.romualdi,GR - GIORGIA R.,36,1
+f538e494-84f3-4ea8-ae3b-f0f142294fbe,ilaria.prosperi,ILARIA P.,36,1
+2c075776-4fd8-49f3-b781-7842bd8156de,lorenzo.diflorio,LORENZO,36,1
+6663d684-ce88-47ff-a4f7-e40d3b82a13f,niccolo.cannata,NC - NICCOLO C.,36,1
+d71b50b4-750e-4644-9786-becc6520c6d7,sara.fabbrini,SARA FABBRINI,30,1
+9c1113fb-90f9-4b8b-8fdd-bcc7b6b5365b,fabrizio.bacci,FABRIZIO B.,36,1
+38b41087-0565-4dea-8ddf-e3b522a14368,clarissa.paggini,PAC - CLARISSA P.,36,1
+c720feeb-93e1-4d88-b275-525f95f377ee,alice.corduri,ALICE C.,36,1
+c8bcdb42-2d07-4c97-8f91-57a3f7b2809c,federica.merli,NULL,40,1
+6bfc9899-f572-4482-8294-f75649fd81b8,hr.admin,NULL,40,1
+7afecb62-aa18-4106-a82b-a906fa7e488d,Mario.Cipriani,MAC,36,1
+23585a8f-5bb9-44d7-a5f9-d7498c60ab2c,sara.gherezghier,SARA G.,36,1
+43072b87-23d4-4ad6-88f8-7999ef3c86ca,alessandro.serboli,AS,36,1
+9964c775-c7f7-42d2-9d2c-a75cb68487d1,laura.gori,LG - LAURA G,30,1
+d5900ef2-17fd-42da-b9ea-b20a194fec05,valentina.dini,VALENTINA D,30,1
+413e6437-7712-4672-8d5f-80a6c94ef119,daniela.fornaini,DF- FORNAINI D.,24,1
+ab577efb-8d05-4666-a51a-6b95edc5ec45,fabio.bacci,FABIO B.,36,1
+b5ca6829-6ac9-4e18-96d7-3282ff6f3250,miriam.corazza,MC _Miriam Corazza,30,1
+27e0791f-5767-4877-b1e4-c80aceb86623,elisa.portolani,EP,30,1
+b8eaaef1-8890-4d24-8c6c-3db23f8812a0,ilaria.rosseti,IR _ILARIA ROS,30,1
+477951d3-95b8-4933-ad3b-ae6f86eafc55,claudia.belardini,CB,36,1
+8b9bd17e-0e24-43f0-81f3-854b0464555f,silvia.tamantini,SILVIA TAM,30,1
+4d71f5cd-5e03-4e0e-b17d-593586b88b99,valentina.serboli,VALENTINA S.,36,1
+8982ec1f-1303-4c68-a89f-db4b125e1e3b,federico.pasqui,FEP,24,1
+c280d18d-86b9-4bba-85e6-2c00472efd9d,federico.bonaccini,FE - FEDERICO BON,36,1
+fa431862-6ab2-46f0-91f3-97ae1452fc85,edoardo.cascini,EC - EDUARDO C,30,1
+8d97501c-e7a6-46e6-9882-10ee0dea5a69,Marco.Bacci,MB - MARCO B,40,1
+144bc00f-b27f-49a9-8664-9bcd79ea6975,Sara.Farsetti,SARA FARSETTI,36,1
+1916bf76-0235-4795-91ba-407148f8a703,selene.fabbrini,SEF,36,1
+66d45786-61fa-43a9-af9f-7a5341abfc6e,silvia.bacci,SBA,30,1
+78732633-0af4-4912-9602-d3923d7c10d0,letizia.lupo,LET,36,1
+57f57d9a-735a-4bcc-afb6-f2799bd738a4,manuel.gori,MANUEL,36,1
+ef1909c6-1a9a-492d-9762-3e293e7a5d2a,alexandro.blajuti,NULL,40,1
+730acd68-bb73-4257-a670-dc3ab1bb6074,kevin.bisi,KB,36,1
+51d48681-ace3-4be0-be3f-785f2a8ee280,Stefano.Morandi,NULL,40,0
+fafe9819-8c58-4398-a1cc-77584270b6ed,alessia.filippelli,AF - ALESSIA F.,36,1
+4afd5d07-d782-4b98-92cb-eea7ca0104bf,antonio.sammartano,SAM - ANTONIO S.,30,1
+10005f55-8589-4836-800d-4b8bba0bf675,alessia.eliso,AE- ALESSIA ELISO,24,1
+c71ec1ec-5e2b-4c33-8c89-de5897a207a6,alessio.muracchini,MUR - ALESSIO M.,36,1
+f488e272-24db-42ce-9d36-80a013657223,cinzia.buccianti,BUC - CINZIA B.,30,1
+9b1e36ac-7e99-4109-b4c6-9a85c1bf7719,enrico.ceccherini,ENRICO C.,36,1
+9249db54-a23a-48e5-847d-cae130c90544,marco.ceccherini,CEC - MARCO C.,30,1
+0d2b5c5a-8a41-4997-ad20-a604731bb160,sofia.baldi,SOF - SOFIA B.,30,1
+299503c0-1a91-43dd-8b64-b2b35f44afd6,valentina.cucuccio,VALENTINA C.,36,1
+d6d79627-a1ee-4178-bd78-110fa1f3c100,Giorgio.Gregori,NULL,40,0
+11838d58-5415-42bd-8c7f-3bef4f9db2aa,andrea.torluccio,TOR - ANDREA T.,30,0
+96b641a5-1e20-43b7-b1fb-3f2921eaca46,serena.landi,SER - SERENA L.,30,1
+aaefc13b-a985-4a6e-9d0c-f1366cffca9a,Operatore.Generale,NULL,40,1
+e224e0ba-d92c-4e70-b675-2ff7e293c27c,francesco.marini,NULL,40,1
+a4ad082b-fd58-4e76-9864-5a0339b700be,elisa.staderini,EST - ELISA STADERINI,30,1
+7e88a351-8bd2-4db4-8d56-1cdf9734e9a7,federico.discala,FED,30,1
+0913de15-f519-4be3-9062-5b7e743d5e2b,f.fabbri.server,NULL,40,1
+d1123909-9ea0-46ac-b6bc-cd79543a0267,edoardo.cacioli,EDO - Cacioli Edoardo,24,1
+f17d430a-5b83-47c8-ac20-77c5fe7864f7,teresa.serafini,TES,24,1
+d6bb32c2-721c-4e93-b32d-96b031accd42,valentina.navarrini,NAV,30,1
