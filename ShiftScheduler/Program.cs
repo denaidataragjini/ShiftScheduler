@@ -1,3 +1,4 @@
+using ShiftScheduler.ML;
 using ShiftScheduler.Models;
 using ShiftScheduler.Services;
 
@@ -8,6 +9,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+var trainer = new ModelTrainer();
+
+trainer.Train("Output/training_dataset.csv");
 
 //try
 //{
