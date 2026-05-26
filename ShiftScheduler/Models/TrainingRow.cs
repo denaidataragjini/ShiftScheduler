@@ -8,8 +8,6 @@ public class TrainingRow
 
     public int ShiftType { get; set; }
 
-    public DateTime Date { get; set; }
-
     public int DayOfWeek { get; set; }
 
     public int Month { get; set; }

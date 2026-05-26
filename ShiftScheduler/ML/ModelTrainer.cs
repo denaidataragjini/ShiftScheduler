@@ -1,4 +1,5 @@
 ﻿using Microsoft.ML;
+using Microsoft.ML.Data;
 
 namespace ShiftScheduler.ML
 {
@@ -6,7 +7,7 @@ namespace ShiftScheduler.ML
     {
         public void Train(string datasetPath)
         {
-            var mlContext = new MLContext();
+            var mlContext = new MLContext(seed: 42);
 
             var data = mlContext.Data.LoadFromTextFile<SchedulePredictionInput>(
                 path: datasetPath,
@@ -19,9 +20,22 @@ namespace ShiftScheduler.ML
                 mlContext.Transforms.Categorical.OneHotEncoding(
                     new[]
                     {
-                    new InputOutputColumnPair("EmployeeEncoded", nameof(SchedulePredictionInput.EmployeeId)),
-                    new InputOutputColumnPair("PositionEncoded", nameof(SchedulePredictionInput.PositionId))
+                        new InputOutputColumnPair("EmployeeEncoded", nameof(SchedulePredictionInput.EmployeeId)),
+                        new InputOutputColumnPair("PositionEncoded", nameof(SchedulePredictionInput.PositionId))
                     })
+
+                .Append(mlContext.Transforms.Conversion.ConvertType(
+                    nameof(SchedulePredictionInput.IsWeekend),
+                    nameof(SchedulePredictionInput.IsWeekend),
+                    DataKind.Single))
+
+                .Append(mlContext.Transforms.Conversion.ConvertType(
+                    nameof(SchedulePredictionInput.NightShift),
+                    nameof(SchedulePredictionInput.NightShift),
+                    DataKind.Single))
+
+                .Append(mlContext.Transforms.Conversion.ConvertType(
+                    "Label", "Label", DataKind.Boolean))
 
                 .Append(mlContext.Transforms.Concatenate(
                     "Features",
@@ -29,6 +43,7 @@ namespace ShiftScheduler.ML
                     "PositionEncoded",
                     nameof(SchedulePredictionInput.ShiftType),
                     nameof(SchedulePredictionInput.DayOfWeek),
+                    nameof(SchedulePredictionInput.Month),
                     nameof(SchedulePredictionInput.IsWeekend),
                     nameof(SchedulePredictionInput.ContractHours),
                     nameof(SchedulePredictionInput.NightShift)))
@@ -49,15 +64,18 @@ namespace ShiftScheduler.ML
                 predictions,
                 labelColumnName: "Label");
 
-            Console.WriteLine($"Accuracy: {metrics.Accuracy}");
-            Console.WriteLine($"AUC: {metrics.AreaUnderRocCurve}");
+            Console.WriteLine($"Accuracy:  {metrics.Accuracy:P2}");
+            Console.WriteLine($"AUC:       {metrics.AreaUnderRocCurve:P2}");
+            Console.WriteLine($"F1 Score:  {metrics.F1Score:P2}");
+
+            Directory.CreateDirectory("ML");
 
             mlContext.Model.Save(
                 model,
                 data.Schema,
                 "ML/model.zip");
 
-            Console.WriteLine("Model saved.");
+            Console.WriteLine("Model saved to ML/model.zip");
         }
     }
 }
