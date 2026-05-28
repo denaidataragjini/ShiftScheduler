@@ -6,7 +6,7 @@ using System.Globalization;
 
 public class TrainingDataGeneratorService
 {
-    private const int NegativesPerPositive = 3;
+    private const int NegativesPerPositive = 1;
 
     private readonly List<int> NightShiftTypes = new() { 18 };
 
@@ -17,7 +17,7 @@ public class TrainingDataGeneratorService
     {
         var result = new List<TrainingRow>();
 
-        var random = new Random();
+        var random = new Random(42);
 
         var scheduleLookup = schedules
             .Select(x => $"{x.EmployeeId}_{x.Date.Date}_{x.ShiftType}")
@@ -93,9 +93,7 @@ public class TrainingDataGeneratorService
     public void ExportCsv(List<TrainingRow> rows, string path)
     {
         using var writer = new StreamWriter(path);
-
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-
         csv.WriteRecords(rows);
     }
 }

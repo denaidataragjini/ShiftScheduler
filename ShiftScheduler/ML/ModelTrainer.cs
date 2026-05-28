@@ -50,16 +50,16 @@ namespace ShiftScheduler.ML
 
                 .Append(mlContext.BinaryClassification.Trainers.LightGbm(
                     labelColumnName: "Label",
-                    featureColumnName: "Features"));
+                    featureColumnName: "Features",
+                    numberOfIterations: 200,
+                    learningRate: 0.05,
+                    numberOfLeaves: 31));
 
             Console.WriteLine("Training model...");
-
             var model = pipeline.Fit(split.TrainSet);
 
             Console.WriteLine("Evaluating model...");
-
             var predictions = model.Transform(split.TestSet);
-
             var metrics = mlContext.BinaryClassification.Evaluate(
                 predictions,
                 labelColumnName: "Label");
@@ -69,12 +69,7 @@ namespace ShiftScheduler.ML
             Console.WriteLine($"F1 Score:  {metrics.F1Score:P2}");
 
             Directory.CreateDirectory("ML");
-
-            mlContext.Model.Save(
-                model,
-                data.Schema,
-                "ML/model.zip");
-
+            mlContext.Model.Save(model, data.Schema, "ML/model.zip");
             Console.WriteLine("Model saved to ML/model.zip");
         }
     }
