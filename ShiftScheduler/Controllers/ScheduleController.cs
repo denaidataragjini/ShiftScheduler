@@ -1,35 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShiftScheduler.Models;
 using ShiftScheduler.Services;
 
 namespace ShiftScheduler.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class ScheduleController : ControllerBase
+    [Route("api/[controller]/[action]")]
+    public class ScheduleController(IPredictionService predictionService, IShiftPredictionService shiftPredictionService) : ControllerBase
     {
-        private readonly PredictionService _predictionService;
+        private readonly IPredictionService _predictionService = predictionService;
+        private readonly IShiftPredictionService _shiftPredictionService = shiftPredictionService;
 
-        public ScheduleController()
+        [HttpPost]
+        public IActionResult ScoreCandidates([FromBody] ScoreCandidatesRequest request)
         {
-            _predictionService = new PredictionService("ML/model.zip");
+            var result = _predictionService.ScoreCandidates(request);
+
+            return Ok(result);
         }
 
-        [HttpGet("scoreCandidates")]
-        public IActionResult ScoreCandidates(
-            [FromQuery] string positionId,
-            [FromQuery] int shiftType,
-            [FromQuery] int dayOfWeek,
-            [FromQuery] int month,
-            [FromQuery] bool isWeekend,
-            [FromQuery] DateTime date)
+        [HttpPost]
+        public IActionResult PredictShifts([FromBody] ShiftSuggestionRequest request)
         {
-            var result = _predictionService.ScoreCandidates(
-                positionId,
-                shiftType,
-                dayOfWeek,
-                month,
-                isWeekend,
-                date);
+            var result = _shiftPredictionService.PredictShifts(request);
 
             return Ok(result);
         }

@@ -8,7 +8,7 @@ public class TrainingDataGeneratorService
 {
     private const int NegativesPerPositive = 1;
 
-    private readonly List<int> NightShiftTypes = new() { 18 };
+    private readonly List<int> NightShiftTypes = [18];
 
     public List<TrainingRow> Generate(
         List<Schedule> schedules,
@@ -90,7 +90,61 @@ public class TrainingDataGeneratorService
 
         return result;
     }
+
+    public List<ShiftTrainingRow> GenerateShiftDataset(List<ShiftTypes> shiftTypes, List<Schedule> schedules)
+    {
+        var result = new List<ShiftTrainingRow>();
+
+
+        var groups = schedules.GroupBy(x => new
+        {
+            x.PositionId,
+            Date = x.Date.Date
+        });
+        foreach (var group in groups)
+        {
+            var date = group.Key.Date;
+
+            var dayOfWeek = (int)date.DayOfWeek;
+
+            var month = date.Month;
+
+            var isWeekend =
+                date.DayOfWeek == DayOfWeek.Saturday ||
+                date.DayOfWeek == DayOfWeek.Sunday;
+
+            var existingShifts = group
+                .Select(x => x.ShiftType)
+                .Distinct()
+                .ToHashSet();
+
+            foreach (var shiftType in shiftTypes)
+            {
+                result.Add(new ShiftTrainingRow
+                {
+                    PositionId = group.Key.PositionId,
+
+                    DayOfWeek = dayOfWeek,
+
+                    Month = month,
+
+                    IsWeekend = isWeekend,
+
+                    ShiftType = shiftType.Id,
+
+                    Label = existingShifts.Contains(shiftType.Id) ? 1 : 0
+                });
+            }
+        }
+        return result;
+    }
     public void ExportCsv(List<TrainingRow> rows, string path)
+    {
+        using var writer = new StreamWriter(path);
+        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+        csv.WriteRecords(rows);
+    }
+    public void ExportShiftCsv(List<ShiftTrainingRow> rows, string path)
     {
         using var writer = new StreamWriter(path);
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);

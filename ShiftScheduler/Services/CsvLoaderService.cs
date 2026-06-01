@@ -2,6 +2,7 @@
 using CsvHelper.Configuration;
 using System.Globalization;
 
+
 namespace ShiftScheduler.Services
 {
     public class CsvLoaderService
@@ -18,7 +19,7 @@ namespace ShiftScheduler.Services
 
             using var csv = new CsvReader(reader, config);
 
-            return csv.GetRecords<T>().ToList();
+            return [.. csv.GetRecords<T>()];
         }
     }
 }
