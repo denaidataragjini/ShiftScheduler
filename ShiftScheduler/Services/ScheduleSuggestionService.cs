@@ -12,69 +12,26 @@ namespace ShiftScheduler.Services
 
         public IEnumerable<ScheduleSuggestionResponse> GenerateSchedule(ScheduleSuggestionRequest request)
         {
-
-            var predictedShifts = _shiftPredictionService.PredictShifts(
-                new ShiftSuggestionRequest
-                {
-                    PositionId = request.PositionId,
-                    Date = request.Date
-                }
-            );
-
             var assignedEmployees = new HashSet<string>();
-
-            var result = new List<ScheduleSuggestionResponse>();
-            var positions = _csvLoaderService.Load<Position>("Data/positions.csv");
-
-            foreach (var shift in predictedShifts)
-            {
-                var candidates = _employeePredictionService.ScoreCandidates(
-                new ScoreCandidatesRequest
-                {
-                    PositionId = request.PositionId,
-                    ShiftType = shift.ShiftType,
-                    Date = request.Date
-                });
-                var bestCandidate = candidates.FirstOrDefault(x => !assignedEmployees.Contains(x.EmployeeId));
-
-                if (bestCandidate == null)
-                    continue;
-
-                var position = positions.FirstOrDefault(x => x.Id == request.PositionId);
-
-                assignedEmployees.Add(bestCandidate.EmployeeId);
-
-                result.Add(new ScheduleSuggestionResponse
-                {
-                    PositionId = request.PositionId,
-                    PositionName= position?.Name ?? request.PositionId,
-                    ShiftType = shift.ShiftType,
-                    Category = shift.Category,
-                    StartTime = shift.StartTime,
-                    EndTime = shift.EndTime,
-                    Employee = bestCandidate.Employee,
-                    Score = bestCandidate.Probability,
-
-                });
-            }
-
-            return result;
+            return GenerateScheduleWithExclusions(request, assignedEmployees);
         }
 
         public IEnumerable<ScheduleSuggestionResponse> GenerateDailySchedule(DateTime date)
         {
             var result = new List<ScheduleSuggestionResponse>();
-
             var positions = _csvLoaderService.Load<Position>("Data/positions.csv");
+
+            var assignedEmployees = new HashSet<string>();
 
             foreach (var position in positions)
             {
-                var schedule = GenerateSchedule(
+                var schedule = GenerateScheduleWithExclusions(
                     new ScheduleSuggestionRequest
                     {
                         PositionId = position.Id,
                         Date = date
-                    });
+                    },
+                    assignedEmployees);
 
                 result.AddRange(schedule);
             }
@@ -146,6 +103,56 @@ namespace ShiftScheduler.Services
                 });
             }).GeneratePdf();
         }
+
+        private IEnumerable<ScheduleSuggestionResponse> GenerateScheduleWithExclusions(
+    ScheduleSuggestionRequest request,
+    HashSet<string> assignedEmployees)
+        {
+            var predictedShifts = _shiftPredictionService.PredictShifts(
+                new ShiftSuggestionRequest
+                {
+                    PositionId = request.PositionId,
+                    Date = request.Date
+                });
+
+            var result = new List<ScheduleSuggestionResponse>();
+            var positions = _csvLoaderService.Load<Position>("Data/positions.csv");
+
+            foreach (var shift in predictedShifts)
+            {
+                var candidates = _employeePredictionService.ScoreCandidates(
+                    new ScoreCandidatesRequest
+                    {
+                        PositionId = request.PositionId,
+                        ShiftType = shift.ShiftType,
+                        Date = request.Date
+                    });
+
+                var bestCandidate = candidates.FirstOrDefault(x => !assignedEmployees.Contains(x.EmployeeId));
+
+                if (bestCandidate == null)
+                    continue;
+
+                var position = positions.FirstOrDefault(x => x.Id == request.PositionId);
+
+                assignedEmployees.Add(bestCandidate.EmployeeId);
+
+                result.Add(new ScheduleSuggestionResponse
+                {
+                    PositionId = request.PositionId,
+                    PositionName = position?.Name ?? request.PositionId,
+                    ShiftType = shift.ShiftType,
+                    Category = shift.Category,
+                    StartTime = shift.StartTime,
+                    EndTime = shift.EndTime,
+                    Employee = bestCandidate.Employee,
+                    Score = bestCandidate.Probability
+                });
+            }
+
+            return result;
+        }
+
         private static string GetCategoryTitle(string category)
         {
             return category switch
