@@ -19,12 +19,12 @@ namespace ShiftScheduler.ML
             var pipeline =
                 mlContext.Transforms.Categorical.OneHotEncoding(
                     [
-                        new InputOutputColumnPair("PositionEncoded", nameof(SchedulePredictionInput.PositionId))
+                        new InputOutputColumnPair("PositionEncoded", nameof(EmployeePredictionInput.PositionId))
                     ])
 
                 .Append(mlContext.Transforms.Conversion.ConvertType(
-                    nameof(SchedulePredictionInput.IsWeekend),
-                    nameof(SchedulePredictionInput.IsWeekend),
+                    nameof(EmployeePredictionInput.IsWeekend),
+                    nameof(EmployeePredictionInput.IsWeekend),
                     DataKind.Single))
 
                 .Append(mlContext.Transforms.Conversion.ConvertType(

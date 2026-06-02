@@ -2,7 +2,7 @@
 
 namespace ShiftScheduler.ML
 {
-    public class SchedulePrediction
+    public class EmployeePrediction
     {
         [ColumnName("PredictedLabel")]
         public bool PredictedLabel { get; set; }

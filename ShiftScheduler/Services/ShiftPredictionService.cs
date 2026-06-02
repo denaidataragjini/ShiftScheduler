@@ -61,9 +61,10 @@ namespace ShiftScheduler.Services
                 predictions.Add(new ShiftSuggestionResponse
                 {
                     ShiftType = shift.Id,
-
-                    Probability =
-                            prediction.Probability
+                    Category = shift.Category,
+                    StartTime = shift.StartTime,
+                    EndTime = shift.EndTime,
+                    Probability = prediction.Probability
                 });
             }
 

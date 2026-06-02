@@ -2,7 +2,7 @@
 
 namespace ShiftScheduler.Services
 {
-    public interface IPredictionService
+    public interface IEmployeePredictionService
     {
         IEnumerable<ScoreCandidateResponse> ScoreCandidates(ScoreCandidatesRequest request);
     }

@@ -2,7 +2,7 @@
 
 namespace ShiftScheduler.ML;
 
-public class SchedulePredictionInput
+public class EmployeePredictionInput
 {
     [LoadColumn(0)]
     public string EmployeeId { get; set; }

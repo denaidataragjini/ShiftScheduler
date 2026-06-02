@@ -9,7 +9,7 @@ namespace ShiftScheduler.ML
         {
             var mlContext = new MLContext(seed: 42);
 
-            var data = mlContext.Data.LoadFromTextFile<SchedulePredictionInput>(
+            var data = mlContext.Data.LoadFromTextFile<EmployeePredictionInput>(
                 path: datasetPath,
                 hasHeader: true,
                 separatorChar: ',');
@@ -20,18 +20,18 @@ namespace ShiftScheduler.ML
                 mlContext.Transforms.Categorical.OneHotEncoding(
                     new[]
                     {
-                        new InputOutputColumnPair("EmployeeEncoded", nameof(SchedulePredictionInput.EmployeeId)),
-                        new InputOutputColumnPair("PositionEncoded", nameof(SchedulePredictionInput.PositionId))
+                        new InputOutputColumnPair("EmployeeEncoded", nameof(EmployeePredictionInput.EmployeeId)),
+                        new InputOutputColumnPair("PositionEncoded", nameof(EmployeePredictionInput.PositionId))
                     })
 
                 .Append(mlContext.Transforms.Conversion.ConvertType(
-                    nameof(SchedulePredictionInput.IsWeekend),
-                    nameof(SchedulePredictionInput.IsWeekend),
+                    nameof(EmployeePredictionInput.IsWeekend),
+                    nameof(EmployeePredictionInput.IsWeekend),
                     DataKind.Single))
 
                 .Append(mlContext.Transforms.Conversion.ConvertType(
-                    nameof(SchedulePredictionInput.NightShift),
-                    nameof(SchedulePredictionInput.NightShift),
+                    nameof(EmployeePredictionInput.NightShift),
+                    nameof(EmployeePredictionInput.NightShift),
                     DataKind.Single))
 
                 .Append(mlContext.Transforms.Conversion.ConvertType(
@@ -41,12 +41,12 @@ namespace ShiftScheduler.ML
                     "Features",
                     "EmployeeEncoded",
                     "PositionEncoded",
-                    nameof(SchedulePredictionInput.ShiftType),
-                    nameof(SchedulePredictionInput.DayOfWeek),
-                    nameof(SchedulePredictionInput.Month),
-                    nameof(SchedulePredictionInput.IsWeekend),
-                    nameof(SchedulePredictionInput.ContractHours),
-                    nameof(SchedulePredictionInput.NightShift)))
+                    nameof(EmployeePredictionInput.ShiftType),
+                    nameof(EmployeePredictionInput.DayOfWeek),
+                    nameof(EmployeePredictionInput.Month),
+                    nameof(EmployeePredictionInput.IsWeekend),
+                    nameof(EmployeePredictionInput.ContractHours),
+                    nameof(EmployeePredictionInput.NightShift)))
 
                 .Append(mlContext.BinaryClassification.Trainers.LightGbm(
                     labelColumnName: "Label",

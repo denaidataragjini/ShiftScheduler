@@ -7,12 +7,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IPredictionService, PredictionService>();
+builder.Services.AddSingleton<IEmployeePredictionService, EmployeePredictionService>();
 builder.Services.AddSingleton<IShiftPredictionService, ShiftPredictionService>();
+builder.Services.AddSingleton<IScheduleSuggestionService, ScheduleSuggestionService>();
 
 var app = builder.Build();
 var loader = new CsvLoaderService();
 
+#region Schedule Model Generator
 //var schedules =
 //    loader.Load<Schedule>("Data/schedules.csv");
 //var shiftTypes =
@@ -30,13 +32,14 @@ var loader = new CsvLoaderService();
 //Console.WriteLine(
 //    $"Generated shift rows: {rows.Count}");
 
+//Console.WriteLine("Training model...");
+//var trainer = new ShiftModelTrainer();
+//trainer.Train("Output/Shift_training_dataset.csv");
 
-Console.WriteLine("Training model...");
-var trainer = new ShiftModelTrainer();
-trainer.Train("Output/Shift_training_dataset.csv");
+//Console.WriteLine("DONE");
+#endregion
 
-Console.WriteLine("DONE");
-
+#region Employee Model Generator
 //try
 //{
 //    Console.WriteLine("STARTING...");
@@ -78,6 +81,9 @@ Console.WriteLine("DONE");
 //    Console.WriteLine(ex.Message);
 //    Console.WriteLine(ex.StackTrace);
 //}
+
+#endregion
+
 
 if (app.Environment.IsDevelopment())
 {

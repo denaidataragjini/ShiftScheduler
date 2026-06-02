@@ -4,17 +4,17 @@ using ShiftScheduler.Models;
 
 namespace ShiftScheduler.Services
 {
-    public class PredictionService : IPredictionService
+    public class EmployeePredictionService : IEmployeePredictionService
     {
-        private readonly PredictionEngine<SchedulePredictionInput, SchedulePrediction> _engine;
+        private readonly PredictionEngine<EmployeePredictionInput, EmployeePrediction> _engine;
         private readonly CsvLoaderService _csvLoaderService;
         private readonly HashSet<int> _nightShiftTypes = [18];
 
-        public PredictionService()
+        public EmployeePredictionService()
         {
             var mlContext = new MLContext();
             var model = mlContext.Model.Load("ML/model.zip", out _);
-            _engine = mlContext.Model.CreatePredictionEngine<SchedulePredictionInput, SchedulePrediction>(model);
+            _engine = mlContext.Model.CreatePredictionEngine<EmployeePredictionInput, EmployeePrediction>(model);
             _csvLoaderService = new CsvLoaderService();
         }
 
@@ -47,7 +47,7 @@ namespace ShiftScheduler.Services
                 if (_nightShiftTypes.Contains(request.ShiftType) && !employee.NightShift)
                     continue;
 
-                var input = new SchedulePredictionInput
+                var input = new EmployeePredictionInput
                 {
                     EmployeeId = employee.Id,
                     PositionId = request.PositionId,
